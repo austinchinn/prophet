@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~dragula/dist/dragula.css';
+@import '~ngx-toastr/toastr.css';
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+* {
+	font-family: 'Open Sans';
+}

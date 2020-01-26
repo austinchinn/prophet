@@ -1,0 +1,145 @@
+<header></header>
+
+<div class="toggle-button">
+	<button type="button" class="btn btn-default" *ngIf="username === 'demo'" (click)="editMode = !editMode; toLive()">{{editMode ? 'Switch to Live Mode' : 'Switch to Edit Mode'}}</button>
+</div>
+
+<div *ngIf="!editMode" class="col-xs-12 center heading point-padding">
+	Points: {{points}}
+</div>
+
+<div *ngIf="editMode" class="col-xs-12 center">
+	<div class="padding-bottom">
+		Drag and drop to order the teams. Score 2 points for each correct team placement.
+	</div>
+	<button type="button" class="btn btn-primary btn-lg" (click)="saveOrder()" [disabled]="!changed">Save</button>
+</div>
+
+<div class="col-xs-6 padding-right" *ngIf="!editMode">
+	<div class="lcs bold">LCS</div>
+	<ul class="list-group float-right">
+		<li class="list-group-item" [ngClass]="team.correct ? 'correct' : 'wrong'" *ngFor="let team of naTeams">
+			<div class="block-parent">
+				<div class="block-child">
+					<img src="../../assets/images/{{team.abbr}}.png" class="logo margin-right">
+				</div>
+				<div class="block-child">
+					<div class="hidden-xs">{{team.name}}</div>
+					<div class="visible-xs">{{team.abbr.toUpperCase()}}</div>
+					<div>{{team.record}}</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<ul class="placement-list float-right center">
+		<li class="placement">{{naPlacements[0]}}</li>
+		<li class="placement">{{naPlacements[1]}}</li>
+		<li class="placement">{{naPlacements[2]}}</li>
+		<li class="placement">{{naPlacements[3]}}</li>
+		<li class="placement">{{naPlacements[4]}}</li>
+		<li class="placement">{{naPlacements[5]}}</li>
+		<li class="placement">{{naPlacements[6]}}</li>
+		<li class="placement">{{naPlacements[7]}}</li>
+		<li class="placement">{{naPlacements[8]}}</li>
+		<li class="placement">{{naPlacements[9]}}</li>
+	</ul>
+</div>
+
+<div class="col-xs-6 padding-left" *ngIf="!editMode">
+	<div class="lec bold">LEC</div>
+	<ul class="placement-list float-left center">
+		<li class="placement">{{euPlacements[0]}}</li>
+		<li class="placement">{{euPlacements[1]}}</li>
+		<li class="placement">{{euPlacements[2]}}</li>
+		<li class="placement">{{euPlacements[3]}}</li>
+		<li class="placement">{{euPlacements[4]}}</li>
+		<li class="placement">{{euPlacements[5]}}</li>
+		<li class="placement">{{euPlacements[6]}}</li>
+		<li class="placement">{{euPlacements[7]}}</li>
+		<li class="placement">{{euPlacements[8]}}</li>
+		<li class="placement">{{euPlacements[9]}}</li>
+	</ul>
+	<ul class="list-group float-left">
+		<li class="list-group-item" [ngClass]="team.correct ? 'correct' : 'wrong'" *ngFor="let team of euTeams">
+			<div class="block-parent">
+				<div class="block-child">
+					<img src="../../assets/images/{{team.abbr}}.png" class="logoEu margin-right">
+				</div>
+				<div class="block-child">
+					<div class="hidden-xs">{{team.name}}</div>
+					<div class="visible-xs">{{team.abbr.toUpperCase()}}</div>
+					<div>{{team.record}}</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<div class="col-xs-6 padding-right" *ngIf="editMode">
+	<div class="lcs bold">LCS</div>
+	<ul class="list-group float-right drag-list-group" dragula="naTeams" [(dragulaModel)]="naTeams">
+		<li class="list-group-item move-cursor" *ngFor="let team of naTeams">
+			<div class="block-parent">
+				<div class="block-child">
+					<img src="../../assets/images/{{team.abbr}}.png" class="logo margin-right">
+				</div>
+				<div class="block-child">
+					<div class="hidden-xs">{{team.name}}</div>
+					<div class="visible-xs">{{team.abbr.toUpperCase()}}</div>
+					<!-- <div>0 - 0</div> -->
+				</div>
+			</div>
+		</li>
+	</ul>
+	<ul class="placement-list float-right center">
+		<li class="placement">1</li>
+		<li class="placement">2</li>
+		<li class="placement">3</li>
+		<li class="placement">4</li>
+		<li class="placement">5</li>
+		<li class="placement">6</li>
+		<li class="placement">7</li>
+		<li class="placement">8</li>
+		<li class="placement">9</li>
+		<li class="placement">10</li>
+	</ul>
+</div>
+
+<div class="col-xs-6 padding-left" *ngIf="editMode">
+	<div class="lec bold">LEC</div>
+	<ul class="placement-list float-left center">
+		<li class="placement">1</li>
+		<li class="placement">2</li>
+		<li class="placement">3</li>
+		<li class="placement">4</li>
+		<li class="placement">5</li>
+		<li class="placement">6</li>
+		<li class="placement">7</li>
+		<li class="placement">8</li>
+		<li class="placement">9</li>
+		<li class="placement">10</li>
+	</ul>
+	<ul class="list-group float-left drag-list-group" dragula="euTeams" [(dragulaModel)]="euTeams">
+		<li class="list-group-item move-cursor" *ngFor="let team of euTeams">
+			<div class="block-parent">
+				<div class="block-child">
+					<img src="../../assets/images/{{team.abbr}}.png" class="logoEu margin-right">
+				</div>
+				<div class="block-child">
+					<div class="hidden-xs">{{team.name}}</div>
+					<div class="visible-xs">{{team.abbr.toUpperCase()}}</div>
+					<!-- <div>0 - 0</div> -->
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<div class="col-xs-12 center padding-bottom">
+	<div class="input-group col-xs-10 col-sm-6 col-md-4 col-xs-offset-1 col-sm-offset-3 col-md-offset-4">
+		<input type="text" id="userLink" class="form-control" value="https://prophetlol.herokuapp.com/user/{{username}}" readonly>
+		<span class="input-group-btn">
+			<button class="btn btn-primary" type="button" (click)="copyLink()">Share (Click to copy)</button>
+		</span>
+	</div>
+</div>

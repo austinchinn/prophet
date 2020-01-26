@@ -1,0 +1,13 @@
+html
+	head
+		title= username + '\'s Picks'
+		style
+			include font.css
+			include ../node_modules/bootstrap/dist/css/bootstrap.css
+			include picks.css
+		meta(name='viewport', content='width=device-width', initial-scale= '1')
+	body
+		div.col-xs-12.center.heading
+			a(href='/') Prophet
+		div.col-xs-12.center.heading.bold= 'User not found'
+		div.col-xs-12.center= '(Usernames are case sensitive)'

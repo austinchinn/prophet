@@ -1,0 +1,124 @@
+<app-modal #createLeaderboardModal>
+	<div class="app-modal-body">
+	<i class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="createLeaderboardModal.hide()"></i>
+		<form class="form-newLeaderboard" (ngSubmit)="createLeaderboard()" #newLeaderboardForm="ngForm">
+			<label for="leaderboardName">Leaderboard Name</label>&nbsp;(1-32 characters)
+			<input type="text" class="form-control margin-bottom" placeholder="Name" [(ngModel)]="newLeaderboardName" name="leaderboardName" required maxlength="32" [pattern]="'^.*\\S+.*$'"/>
+			<button class="btn btn-primary pull-right margin-left" type="submit" [disabled]="!newLeaderboardForm.form.valid">Create</button>
+		</form>
+		<button class="btn btn-default pull-right" (click)="closeCreateLeaderboard()">Cancel</button>
+		<div class="invisible margin-bottom">Yo</div>
+	</div>
+</app-modal>
+
+<app-modal #joinLeaderboardModal>
+	<div class="app-modal-body">
+	<i class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="joinLeaderboardModal.hide()"></i>
+		<form class="form-joinLeaderboard" (ngSubmit)="joinLeaderboard()" #joinLeaderboardForm="ngForm">
+			<label for="leaderboardName">Join Leaderboard</label>&nbsp;(Enter 6 digit code)
+			<input type="text" class="form-control margin-bottom" placeholder="Code" [(ngModel)]="joinLeaderboardCode" name="leaderboardName" required minlength="6" maxlength="6" />
+			<button class="btn btn-primary pull-right margin-left" type="submit" [disabled]="!joinLeaderboardForm.form.valid">Join</button>
+		</form>
+		<button class="btn btn-default pull-right" (click)="closeJoinLeaderboard()">Cancel</button>
+		<div class="invisible margin-bottom">Whats up</div>
+	</div>
+</app-modal>
+
+<app-modal #deleteLeaderboardModal>
+	<div class="app-modal-body">
+	<i class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="deleteLeaderboardModal.hide()"></i>
+		<div class="padding-bottom">Delete leaderboard <span class="bold
+		">{{currentLeaderboard?.name}}</span>?
+		</div>
+		<button class="btn btn-primary pull-right margin-left" (click)="deleteLeaderboard(currentLeaderboard?.code)">Confirm</button>
+		<button class="btn btn-default pull-right" (click)="closeDeleteLeaderboard()">Cancel</button>
+		<div class="invisible margin-bottom">Hey</div>
+	</div>
+</app-modal>
+
+<app-modal #leaveLeaderboardModal>
+	<div class="app-modal-body">
+	<i class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="leaveLeaderboardModal.hide()"></i>
+		<div class="padding-bottom">Leave leaderboard <span class="bold
+		">{{currentLeaderboard?.name}}</span>?
+		</div>
+		<button class="btn btn-primary pull-right margin-left" (click)="leaveLeaderboard(currentLeaderboard?.code)">Confirm</button>
+		<button class="btn btn-default pull-right" (click)="closeLeaveLeaderboard()">Cancel</button>
+		<div class="invisible margin-bottom">Hi</div>
+	</div>
+</app-modal>
+
+<header></header>
+
+<div class="col-xs-4 border-right">
+	<div class="bold">Your leaderboards</div>
+	<div class="leaderboard-name name" *ngFor="let leaderboard of leaderboards"><span class="pointer" (click)="getLeaderboard(leaderboard)">{{leaderboard.name}}</span></div>
+	<span class="hidden-mobile">
+		<hr>
+		<a class="bold pointer" (click)="openCreateModal()">Create leaderboard</a>
+		<hr>
+		<a class="bold pointer" (click)="openJoinModal()">Join leaderboard</a>
+		<hr class="no-bottom-margin">
+	</span>
+</div>
+
+<div class="col-xs-6 show-mobile">
+	<a class="bold pointer" (click)="openCreateModal()">Create leaderboard</a>
+	<hr>
+	<a class="bold pointer" (click)="openJoinModal()">Join leaderboard</a>
+</div>
+
+<div class="col-xs-12 show-mobile line">
+</div>
+
+<div class="col-xs-8" *ngIf="loading">
+	Loading...
+</div>
+<div class="col-xs-8" *ngIf="!loading">
+	<div class="bold title list-header name">{{currentLeaderboard?.name}}</div>
+	<div *ngIf="currentLeaderboard && currentLeaderboard.code !== 'all'">
+		<span>Join code: {{currentLeaderboard?.code}}</span>
+		<span class="pull-right pointer" *ngIf="username === currentLeaderboard?.owner" (click)="openDeleteModal()">Delete</span>
+		<span class="pull-right pointer" *ngIf="username !== currentLeaderboard?.owner" (click)="openLeaveModal()">Leave</span>
+	</div>
+	<br>
+
+	<div class="bold title" *ngIf="currentLeaderboard">
+		<span class="padding-right-10">Rank</span>
+		<span>Name</span>
+		<span class="pull-right">Points</span>
+	</div>
+
+	<ul class="list-group">
+		<ng-container *ngFor="let user of currentLeaderboard?.users; let i=index">
+			<li class="list-group-item pointer" *ngIf="pageMin <= i && i < pageMax" (click)="openUser(user.username)">
+				<div >
+				<div class="title item-header">
+					<span class="padding-right-20">{{i+1}}</span>
+					<span>{{user.username}}</span>
+					<span class="pull-right">{{user.points}}</span>
+				</div>
+				<div class="hidden-logos inline-block padding-right">
+					<span *ngFor="let pick of user.picks.naTeams">
+						<img src="../../assets/images/{{pick.abbr}}.png" class="logo">
+					</span>
+				</div>
+				<div class="hidden-logos inline-block">
+					<span *ngFor="let pick of user.picks.euTeams">
+						<img src="../../assets/images/{{pick.abbr}}.png" class="logoEu">
+					</span>
+				</div>
+				</div>
+			</li>
+		</ng-container>
+		<pagination class="center"
+			(goPage)="goToPage($event)"
+			(goNext)="onNext()"
+			(goPrev)="onPrev()"
+			[pagesToShow]="5"
+			[page]="page"
+			[perPage]="limit"
+			[count]="total">
+		</pagination>
+	</ul>
+</div>

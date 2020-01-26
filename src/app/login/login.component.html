@@ -1,0 +1,11 @@
+<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+	<form class="form-login" (ngSubmit)="login()" #loginForm="ngForm">
+		<div class="center"><img src="../../assets/images/logo.png" class="prophet-logo"></div>
+		<div class="description center">Predict the results of the LCS and LEC!</div>
+		<label for="loginUsername">Username</label>
+		<input type="email" class="form-control margin-bottom" placeholder="Username" [(ngModel)]="loginData.username" name="username" required/>
+		<label for="loginPassword">Password</label>
+		<input type="password" class="form-control margin-bottom" placeholder="Password" [(ngModel)]="loginData.password" name="password" required/>
+		<button class="btn btn-primary pull-left" type="submit" [disabled]="!loginForm.form.valid">Login</button>
+	</form>
+</div>

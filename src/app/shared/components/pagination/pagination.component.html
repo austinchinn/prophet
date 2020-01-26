@@ -1,0 +1,21 @@
+<div class="pagination" *ngIf="count > 0">
+	<div class="description">
+		<span class="page-totals">Page {{ page }} of {{ totalPages() }}</span>
+	</div>
+	<div class="numbers">
+		<ul class="pagination">
+			<li class="link" (click)="onPage(1)" [ngClass]="{ 'disabled': page === 1 || loading }" *ngIf="totalPages() > 10"><a>&lt;&lt;</a></li>
+
+			<li class="link" (click)="onPrev()" [ngClass]="{ 'disabled': page === 1 || loading }"><a>&lt;</a></li>
+		
+		<li
+			*ngFor="let pageNum of getPages()"
+			(click)="onPage(pageNum)"
+			[ngClass]="{'active': pageNum === page, 'disabled': loading}"><a>{{ pageNum }}</a></li>
+
+			<li class="link" (click)="onNext(true)" [ngClass]="{ 'disabled': lastPage() || loading }"><a>&gt;</a></li>
+
+			<li class="link" (click)="onPage(totalPages())" [ngClass]="{ 'disabled': lastPage() || loading }" *ngIf="totalPages() > 10"><a>&gt;&gt;</a></li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,198 @@
+li {
+	border-radius: 0 !important;
+}
+
+.list-group {
+	padding: 0px 10px 10px 10px;
+	max-width: 500px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.drag-list-group {
+	touch-action: none;
+}
+
+.logo {
+	width: 50px;
+	height: 50px;
+}
+
+.logoEu {
+	width: 46px;
+	height: 46px;
+	margin: 2px;
+	margin-right: 17px !important;
+}
+
+.heading {
+	font-size: 24px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.center {
+	text-align: center;
+}
+
+.list-group-item {
+	border: 2px solid #ffffff;
+	margin-bottom: -2px;
+	background-color: #bdbdbd;
+	min-width: 244px;
+}
+
+.placement {
+	display: block;
+	height: 72px;
+	font-size: 18px;
+	padding-top: 15px;
+}
+
+.placement-list {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 0px;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.padding-left {
+	padding-left: 30px;
+}
+
+.padding-right {
+	padding-right: 30px;
+}
+
+.padding-top {
+	padding-top: 15px;
+}
+
+.padding-bottom {
+	padding-bottom: 10px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.margin-right {
+	margin-right: 15px;
+}
+
+.mobile-header {
+	display: none;
+}
+
+.toggle-button {
+	position: absolute;
+	top: 65px;
+	left: 10px;
+	z-index: 1000;
+}
+
+@media (max-width: 767px){
+	.visible-xs {
+		display: contents !important;
+	}
+
+	.list-group-item {
+		min-width: 0px;
+	}
+
+	.lcs {
+		padding-right: 54px !important;
+	}
+
+	.lec {
+		padding-left: 74px !important;
+	}
+
+	.toggle-button {
+		position: inherit;
+		text-align: center;
+		padding-bottom: 5px;
+	}
+
+}
+
+@media (max-width: 450px){
+	.list-group-item {
+		padding: 5px 10px;
+	}
+
+	.margin-right {
+		margin-right: 10px;
+	}
+
+	.padding-left, .padding-right {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+	.placement {
+		display: block;
+		height: 62px;
+		font-size: 14px;
+	}
+
+	.logoEu {
+		margin-right: 12px !important;
+	}
+
+	.lcs {
+		padding-right: 46px !important;
+	}
+
+	.lec {
+		padding-left: 62px !important;
+	}
+}
+
+@media (max-width: 335px){
+	.list-group-item {
+		padding: 5px 5px;
+	}
+}
+
+.block-parent {
+    display: table;
+    text-align: left;
+}
+
+.block-child {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.correct {
+	background-color: #a5d6a7;
+}
+
+.wrong {
+	background-color: #ef9a9a;
+}
+
+.lcs {
+	font-size: 24px;
+	text-align: right;
+	padding-right: 112px;
+}
+
+.lec {
+	font-size: 24px;
+	padding-left: 131px;
+}
+
+.move-cursor {
+	cursor: move;
+}

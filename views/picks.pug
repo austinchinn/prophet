@@ -1,0 +1,83 @@
+html
+	head
+		title= username + '\'s Picks'
+		style
+			include font.css
+			include ../node_modules/bootstrap/dist/css/bootstrap.css
+			include picks.css
+		meta(name='viewport', content='width=device-width', initial-scale= '1')
+
+	body
+		div.col-xs-12.center.heading
+			a(href='/') 
+				img.prophet-logo(src='/assets/images/logo.png')
+		div.col-xs-12.center.heading.bold= username + '\'s Picks'
+		div.col-xs-12.center= 'Points: ' + points
+		div.col-xs-6.padding-right
+			div.lcs.bold= 'LCS'
+			ul.list-group.float-right
+				each team in naTeams
+					if team.correct
+						list.list-group-item.correct
+							div.block-parent
+								div.block-child
+									img.logo.margin-right(src='/assets/images/'+team.abbr+'.png')
+								div.block-child
+									div.hidden-xs= team.name
+									div.visible-xs= team.abbr.toUpperCase()
+									div= team.record
+					else
+						list.list-group-item.wrong
+							div.block-parent
+								div.block-child
+									img.logo.margin-right(src='/assets/images/'+team.abbr+'.png')
+								div.block-child
+									div.hidden-xs= team.name
+									div.visible-xs= team.abbr.toUpperCase()
+									div= team.record
+
+			ul.placement-list.float-right.center
+				li.placement= naPlacements[0]
+				li.placement= naPlacements[1]
+				li.placement= naPlacements[2]
+				li.placement= naPlacements[3]
+				li.placement= naPlacements[4]
+				li.placement= naPlacements[5]
+				li.placement= naPlacements[6]
+				li.placement= naPlacements[7]
+				li.placement= naPlacements[8]
+				li.placement= naPlacements[9]
+
+		div.col-xs-6.padding-left
+			div.lec.bold= 'LEC'
+			ul.placement-list.float-left.center
+				li.placement= euPlacements[0]
+				li.placement= euPlacements[1]
+				li.placement= euPlacements[2]
+				li.placement= euPlacements[3]
+				li.placement= euPlacements[4]
+				li.placement= euPlacements[5]
+				li.placement= euPlacements[6]
+				li.placement= euPlacements[7]
+				li.placement= euPlacements[8]
+				li.placement= euPlacements[9]
+			ul.list-group.float-left
+				each team in euTeams
+					if team.correct
+						li.list-group-item.correct
+							div.block-parent
+								div.block-child
+									img.logoEu(src='/assets/images/'+team.abbr+'.png')
+								div.block-child
+									div.hidden-xs= team.name
+									div.visible-xs= team.abbr.toUpperCase()
+									div= team.record
+					else
+						li.list-group-item.wrong
+							div.block-parent
+								div.block-child
+									img.logoEu(src='/assets/images/'+team.abbr+'.png')
+								div.block-child
+									div.hidden-xs= team.name
+									div.visible-xs= team.abbr.toUpperCase()
+									div= team.record
