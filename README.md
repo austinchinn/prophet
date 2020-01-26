@@ -1,3 +1,3 @@
-![alt text](https://raw.githubusercontent.com/austinchinn/prophet/src/assets/images/logo.png)
+![alt text](src/assets/images/logo.png)
 
 https://prophetlol.herokuapp.com/
